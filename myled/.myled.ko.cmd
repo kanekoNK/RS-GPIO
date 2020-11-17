@@ -1,0 +1,1 @@
+cmd_/home/ubuntu/RS-GPIO/myled/myled.ko := ld -r  -EL  -maarch64elf  --build-id  -T ./scripts/module-common.lds -T ./arch/arm64/kernel/module.lds -o /home/ubuntu/RS-GPIO/myled/myled.ko /home/ubuntu/RS-GPIO/myled/myled.o /home/ubuntu/RS-GPIO/myled/myled.mod.o;  true
