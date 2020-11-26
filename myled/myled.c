@@ -1,3 +1,8 @@
+// SPDX-License-Identifier: GPL-2.0
+// /*
+//  * Copyright (C) 2020 NaokiKaneko + Ueda.  All rights reserved.
+//   
+
 #include <linux/module.h>
 #include <linux/fs.h>
 #include <linux/cdev.h>
@@ -60,19 +65,19 @@ static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_
 		for(j = 1; j < 5; j++){
 			if(MR[k][j] == '0'){
 				gpio_base[10] = 1 << 25;
-				msleep(50);
+				msleep(80);
 			}
 			else if(MR[k][j] == '1'){
 				gpio_base[7] = 1 << 25;
-				msleep(50);
+				msleep(80);
 				gpio_base[10] = 1 << 25;
-				msleep(50);
+				msleep(80);
 			}
 			else if(MR[k][j] == '2'){
 				gpio_base[7] = 1 << 25;
-				msleep(150);
+				msleep(240);
 				gpio_base[10] = 1 << 25;
-				msleep(50);
+				msleep(80);
 			}
 		}
 		i++;
