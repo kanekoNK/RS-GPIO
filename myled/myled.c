@@ -4,6 +4,7 @@
 #include <linux/device.h>
 #include <linux/uaccess.h>
 #include <linux/io.h>
+#include <linux/delay.h>
 
 MODULE_AUTHOR("Ryuichi Ueda");
 MODULE_DESCRIPTION("driver for LED control");
@@ -13,19 +14,69 @@ MODULE_VERSION("0.0.1");
 static dev_t dev;
 static struct cdev cdv;
 static struct class *cls = NULL;
+char MR[26][5] = {{'a','1','2','0','0'},
+		 {'b','2','1','1','1'},
+		 {'c','2','1','2','1'},
+		 {'d','2','1','1','0'},
+		 {'e','1','0','0','0'},
+		 {'f','1','1','2','1'},
+		 {'g','2','2','1','0'},
+		 {'h','1','1','1','1'},
+		 {'i','1','1','0','0'},
+	         {'j','1','2','2','2'},
+		 {'k','2','1','2','0'},
+		 {'l','1','2','1','1'},
+		 {'m','2','2','0','0'},
+		 {'n','2','1','0','0'},
+		 {'o','2','2','2','0'},
+		 {'p','1','2','2','1'},
+		 {'q','2','2','1','2'},
+		 {'r','1','2','1','0'},
+		 {'s','1','1','1','0'},
+		 {'t','2','0','0','0'},
+		 {'u','1','1','2','0'},
+		 {'v','1','1','1','2'},
+		 {'w','1','2','2','0'},
+	 	 {'x','2','1','1','2'},
+		 {'y','2','1','2','2'},
+		 {'z','2','2','1','1'}};
 
 static volatile u32 *gpio_base = NULL;
 
 static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_t* pos)
 {
-	char c;
-	if(copy_from_user(&c,buf,sizeof(char)))
+	char c[100];
+	int i = 0;
+	int j = 0;
+	int k = 0;
+	if(copy_from_user(&c,buf,sizeof(c)))
 		return -EFAULT;
 
-	if(c == '0')
-		gpio_base[10] = 1 << 25;
-	else if(c == '1')
-		gpio_base[7] = 1 << 25;
+	while(c[i] != '\0'){
+		k=0;
+		while(MR[k][0] != c[i]){
+			k++;
+		}
+		for(j = 1; j < 5; j++){
+			if(MR[k][j] == '0'){
+				gpio_base[10] = 1 << 25;
+				msleep(50);
+			}
+			else if(MR[k][j] == '1'){
+				gpio_base[7] = 1 << 25;
+				msleep(50);
+				gpio_base[10] = 1 << 25;
+				msleep(50);
+			}
+			else if(MR[k][j] == '2'){
+				gpio_base[7] = 1 << 25;
+				msleep(150);
+				gpio_base[10] = 1 << 25;
+				msleep(50);
+			}
+		}
+		i++;
+	}
 
         return 1;
 }
