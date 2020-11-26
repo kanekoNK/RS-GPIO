@@ -6,7 +6,8 @@
 
 ## デバイスドライバーの改良
 
-デバイスドライバーの改良を行い入力した英文のモールス信号を打つことができるようにしました。
+デバイスドライバーの改良を行い入力した英文のモールス信号を打つことができるようにしました。声が出せない状況になっても、ラズベリーパイがあれば、モールス信号で助けを呼べます。
+
 改良したプログラムのULR
 https://github.com/kanekoNK/RS-GPIO/blob/master/myled/myled.c
 
@@ -34,3 +35,5 @@ https://github.com/kanekoNK/RS-GPIO/blob/master/myled/myled.c
 ---
 ## 実際に動かした動画
 https://youtu.be/hMVFuafjlzk
+
+ * 実家で使用した場合親が心配して部屋に入ってきたので注意が必要
