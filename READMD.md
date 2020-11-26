@@ -12,6 +12,15 @@ https://github.com/kanekoNK/RS-GPIO/blob/master/myled/myled.c
 
 ---
 
+## 使用道具
+ * ラズベリーパイ４/1台
+ * 電子ブザー/1個
+ * LED/1個
+ * ブレットボード/1枚
+ * ジャンパー線/8本
+
+---
+
 ## 実際に動かす手順
 
  * git cloan https://github.com/kanekoNK/RS-GPIO.git
